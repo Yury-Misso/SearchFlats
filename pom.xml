@@ -22,6 +22,8 @@
         <module>audit-service</module>
         <module>report-service</module>
         <module>mail-service</module>
+        <module>parser-sale-service</module>
+        <module>parser-rent-service</module>
     </modules>
 
     <properties>

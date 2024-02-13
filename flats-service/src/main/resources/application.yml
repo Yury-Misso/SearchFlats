@@ -22,9 +22,9 @@ spring:
       pool-name: SpringHikariCP                            # Имя пула соединений
       max-lifetime: 1800000                                # Максимальное время жизни соединения
       connection-test-query: "SELECT 1"                    # Проверка соединения
-    url: jdbc:postgresql://someremotedb:5432/flats         # URL вашей базы данных PostgreSQL
-    username: username                                     # Имя пользователя
-    password: password                                     # Пароль
+    url: jdbc:postgresql://postgresdb:5432/misso           # URL вашей базы данных PostgreSQL
+    username: misso                                        # Имя пользователя
+    password: misso                                        # Пароль
   jackson:
     deserialization:
       fail-on-unknown-properties: true

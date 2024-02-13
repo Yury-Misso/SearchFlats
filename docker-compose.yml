@@ -66,6 +66,18 @@ services:
       - flats_ntwrk
     ports:
       - "8085:8082"
+  parser-sale-service:
+    build: parser-sale-service
+    image: parser-sale-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+  parser-rent-service:
+    build: parser-rent-service
+    image: parser-rent-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
   nginx:
     build: proxy
     image: nginx:1.25.3-alpine
