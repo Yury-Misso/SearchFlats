@@ -1,0 +1,35 @@
+server:
+  port: 8082
+  tomcat:
+    connection-timeout: 20000
+spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: misso
+    password: misso
+  datasource:
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 2
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      pool-name: SpringHikariCP
+      max-lifetime: 1800000
+      connection-test-query: "SELECT 1"
+    url: jdbc:postgresql://postgresdb:5432/misso
+    username: misso
+    password: misso
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+logging:
+  level:
+    root: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - [%level] %msg%n"
+  file:
+    name: # логирование в файл
+token:
+  signing:
+    key: d01b36b0dcc7b72ee778ee475e4d53435e3b5f16d892549e9fab93c48b42dfd4

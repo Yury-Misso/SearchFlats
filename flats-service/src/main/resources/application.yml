@@ -1,0 +1,40 @@
+server:
+  port: 8082
+  tomcat:
+    connection-timeout: 20000
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: misso
+    password: misso
+  datasource:
+    hikari:
+      connection-timeout: 30000                            # Таймаут соединения
+      minimum-idle: 2                                      # Минимальное количество простаивающих соединений
+      maximum-pool-size: 10                                # Максимальный размер пула
+      idle-timeout: 30000                                  # Время простоя соединения
+      pool-name: SpringHikariCP                            # Имя пула соединений
+      max-lifetime: 1800000                                # Максимальное время жизни соединения
+      connection-test-query: "SELECT 1"                    # Проверка соединения
+    url: jdbc:postgresql://someremotedb:5432/flats         # URL вашей базы данных PostgreSQL
+    username: username                                     # Имя пользователя
+    password: password                                     # Пароль
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+logging:
+  level:
+    root: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - [%level] %msg%n"
+  file:
+    name: # оставьте пустым, чтобы отключить логирование в файл
+token:
+  signing:
+    key: d01b36b0dcc7b72ee778ee475e4d53435e3b5f16d892549e9fab93c48b42dfd4

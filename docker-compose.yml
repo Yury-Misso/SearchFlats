@@ -1,0 +1,86 @@
+version: '3.3'
+networks:
+  flats_ntwrk:
+    name: flats_ntwrk
+services:
+  postgresdb:
+    build: postgresql
+    image: postgresql:16.1
+    restart: always
+    environment:
+      POSTGRES_USER: misso
+      POSTGRES_PASSWORD: misso
+    networks:
+      - flats_ntwrk
+    ports:
+      - "5434:5432"
+  rabbitmq:
+    build: rabbitmq
+    image: rabbitmq:3.12.12-management-alpine
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: misso
+      RABBITMQ_DEFAULT_PASS: misso
+    networks:
+      - flats_ntwrk
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  user-service:
+    build: user-service
+    image: user-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "8080:8082"
+  mail-service:
+    build: mail-service
+    image: mail-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "8060:8060"
+  flats-service:
+    build: flats-service
+    image: flats-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "8083:8082"
+  audit-service:
+    build: audit-service
+    image: audit-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "8084:8082"
+  report-service:
+    build: report-service
+    image: report-service:1.0.0
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "8085:8082"
+  nginx:
+    build: proxy
+    image: nginx:1.25.3-alpine
+    volumes:
+      - ./proxy/config/nginx-custom.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - flats_ntwrk
+  redis:
+    build: redis
+    image: redis:7.2.4
+    restart: always
+    networks:
+      - flats_ntwrk
+    ports:
+      - "6379:6379"
